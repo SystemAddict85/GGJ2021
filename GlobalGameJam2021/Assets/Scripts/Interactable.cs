@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Interactable : MonoBehaviour
@@ -10,12 +11,12 @@ public class Interactable : MonoBehaviour
 
     public InteractionInput _input = new InteractionInput();
 
-    public IInteraction _interaction;
+    public List<IInteraction> _interactions;
     private void Awake()
     {
         _outline = GetComponentInChildren<SpriteOutline>();
         _isPlayerInRange = false;
-        _interaction = GetComponent<IInteraction>();
+        _interactions = GetComponents<IInteraction>().ToList();
     }
 
     private void Update()
@@ -27,7 +28,8 @@ public class Interactable : MonoBehaviour
     {
         if (_isPlayerInRange && _input.IsPlayerInteracting)
         {
-            _interaction.Interact();
+            foreach(var interact in _interactions)
+                interact.Interact();
         }
     }
 

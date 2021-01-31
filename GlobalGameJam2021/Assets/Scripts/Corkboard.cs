@@ -7,7 +7,6 @@ public class Corkboard : MonoBehaviour, IInteraction
     [SerializeField]
     private Transform corkboardMapTransform;
 
-    [SerializeField]
     private TextMeshProUGUI buttonHelpText;
 
     private bool _isPlayerInCorkboard = false;
@@ -15,8 +14,16 @@ public class Corkboard : MonoBehaviour, IInteraction
 
     private void Awake()
     {
+        
+    }
+
+    private void Start()
+    {
+        buttonHelpText = UIManager.Instance.buttonHelpText;
         buttonHelpText.enabled = false;
     }
+
+
     public void Interact()
     {
         Player.Instance.transform.position = corkboardMapTransform.position;
@@ -26,7 +33,7 @@ public class Corkboard : MonoBehaviour, IInteraction
 
     private void Update()
     {
-        if (_isPlayerInCorkboard && Input.GetKeyDown(KeyCode.Backspace))
+        if (_isPlayerInCorkboard && Input.GetKeyDown(KeyCode.Backspace) && Player.Instance.CanMove)
         {
             Player.Instance.transform.position = transform.position;
             _isPlayerInCorkboard = false;

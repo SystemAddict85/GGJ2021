@@ -11,14 +11,18 @@ public class PlayerMovement : MonoBehaviour
     private Animator _anim;
     private SpriteRenderer _rend;
 
+    private Player player;
+
     private void Awake()
     {
         _anim = GetComponentInChildren<Animator>();
         _rend = GetComponentInChildren<SpriteRenderer>();
+        player = GetComponent<Player>();
     }
     private void Update()
     {
-        CheckForMovement();
+        if(player.CanMove)
+            CheckForMovement();
     }
 
     private void CheckForMovement()

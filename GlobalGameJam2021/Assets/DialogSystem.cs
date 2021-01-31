@@ -43,7 +43,7 @@ public class DialogSystem : SimpleSingleton<DialogSystem>
 
     private void CheckForMessageFinish()
     {
-        if (Input.GetKeyDown(KeyCode.Return) || _currentTime >= maxMessageTime)
+        if (_currentTime >= maxMessageTime)
         {
             FinishMessage();
         }
@@ -69,7 +69,7 @@ public class DialogSystem : SimpleSingleton<DialogSystem>
         
         _isMessageAlreadyCalled = true;
         ToggleCanvasGroup(true);
-        transform.parent = parentTransform;
+        transform.GetComponent<RectTransform>().SetParent(parentTransform);
         transform.localPosition = Vector3.zero;
         _tmPro.text = message;
     }

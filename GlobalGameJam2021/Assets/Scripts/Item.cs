@@ -4,8 +4,8 @@
 public class Item : MonoBehaviour, IInteraction
 {
     public string itemName;
-    [HideInInspector]
-    public Sprite sprite;
+    public int itemId = 0;
+    public Sprite itemSprite;
     [HideInInspector]
     public Color color = Color.white;
 
@@ -16,8 +16,11 @@ public class Item : MonoBehaviour, IInteraction
 
     private void Awake()
     {
-        var rend = GetComponent<SpriteRenderer>();
-        sprite = rend.sprite;
+        var rend = GetComponentInChildren<SpriteRenderer>();
+
+        if(itemSprite == null)
+            itemSprite = rend.sprite;
+
         color = rend.color;
 
         if (itemName == "")
