@@ -38,11 +38,11 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Room
-    uniqueID: 3648794573
-    locked: 0
   - name: Walls
     uniqueID: 2334757589
+    locked: 0
+  - name: Room
+    uniqueID: 3648794573
     locked: 0
   - name: Default
     uniqueID: 0
@@ -53,12 +53,18 @@ TagManager:
   - name: Interactables
     uniqueID: 2375651175
     locked: 0
-  - name: Player
-    uniqueID: 3216298899
-    locked: 0
   - name: ShadeMask
     uniqueID: 978060341
     locked: 0
   - name: UI
     uniqueID: 3846713677
+    locked: 0
+  - name: Player
+    uniqueID: 3216298899
+    locked: 0
+  - name: InfrontOfPlayer
+    uniqueID: 3863300971
+    locked: 0
+  - name: UIChat
+    uniqueID: 2727202041
     locked: 0

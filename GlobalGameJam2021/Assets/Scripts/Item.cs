@@ -1,23 +1,28 @@
 ﻿using UnityEngine;
 
-public class Item : MonoBehaviour
+[RequireComponent(typeof(Interactable))]
+public class Item : MonoBehaviour, IInteraction
 {
-    public string name;
+    public string itemName;
+    [HideInInspector]
     public Sprite sprite;
+    [HideInInspector]
     public Color color = Color.white;
+
+    public void Interact()
+    {
+        Player.Instance.inventory.ChangeItem(this);
+    }
 
     private void Awake()
     {
-        if(sprite == null)
-        {
-            var rend = GetComponent<SpriteRenderer>();
-            sprite = rend.sprite;
-            color = rend.color;
-        }
+        var rend = GetComponent<SpriteRenderer>();
+        sprite = rend.sprite;
+        color = rend.color;
 
-        if(name == "")
+        if (itemName == "")
         {
-            name = gameObject.name;
+            itemName = gameObject.name;
         }
     }
 }

@@ -5,18 +5,17 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject outlineGameObject;
+    private SpriteOutline _outline;
     private bool _isPlayerInRange = false;
 
     public InteractionInput _input = new InteractionInput();
 
-    public Item item;
+    public IInteraction _interaction;
     private void Awake()
     {
+        _outline = GetComponentInChildren<SpriteOutline>();
         _isPlayerInRange = false;
-        ToggleOutline(false);
-        item = GetComponent<Item>();
+        _interaction = GetComponent<IInteraction>();
     }
 
     private void Update()
@@ -28,24 +27,20 @@ public class Interactable : MonoBehaviour
     {
         if (_isPlayerInRange && _input.IsPlayerInteracting)
         {
-            Player.Instance.inventory.ChangeItem(item);
+            _interaction.Interact();
         }
-    }
-
-    private void ToggleOutline(bool isEnabled) {
-        outlineGameObject.SetActive(isEnabled);
     }
 
     private void PlayerEnters()
     {
         _isPlayerInRange = true;
-        ToggleOutline(true);
+        _outline.ToggleOutline(true);
     }
 
     private void PlayerExits()
     {
         _isPlayerInRange = false;
-        ToggleOutline(false);
+        _outline.ToggleOutline(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
